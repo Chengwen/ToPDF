@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentTop="true"
+            android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Document"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/file"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
+                    android:text="@string/Documents"
+                    android:textAppearance="?android:attr/textAppearanceLarge" 
+                    android:textColor="#1d1d1d"/>
+
+                <TextView
+                    android:id="@+id/Clipboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/clipboard"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
+                    android:text="@string/Clipboard"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#1d1d1d"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/Web"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/web"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
+                    android:text="@string/Web"
+                    android:textAppearance="?android:attr/textAppearanceLarge" 
+                    android:textColor="#1d1d1d"/>
+
+                <TextView
+                    android:id="@+id/Photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/photo1"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
+                    android:text="@string/Photo"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#1d1d1d"/>
+
+        </LinearLayout>
+
+            <TextView
+                android:id="@+id/PDFs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/pdf"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:paddingBottom="40dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:paddingTop="40dp"
+                android:text="@string/PDFs"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#1d1d1d" />
+
+        </LinearLayout>
+
+</RelativeLayout>
+

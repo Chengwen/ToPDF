@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/layout_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#1d1d1d"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@+id/framelayout22"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/title_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="@string/home" 
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+    
+             <LinearLayout
+         android:id="@+id/linearLayout"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_centerHorizontal="true"
+         android:orientation="vertical" 
+         android:background="#e6e6e6">
+        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/main_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/linearLayout"
+            android:layout_below="@id/layout_top"
+            android:orientation="vertical" 
+            android:background="#e6e6e6">
+
+        </FrameLayout>
+    
+
+     
+    
+
+</RelativeLayout>
