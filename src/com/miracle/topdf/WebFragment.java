@@ -18,6 +18,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -86,19 +88,35 @@ public class WebFragment extends Fragment{
                   e1.printStackTrace();
                 }
 
-        		JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.GET,
-        		    apiurl, null, 
-        		                            new Response.Listener<JSONObject>() {
-        		    @Override
-        		    public void onResponse(JSONObject response) {
-        		      try {
-                        Log.e("status",String.valueOf(response.getInt("status"))+" "+response.getString("url"));
-                      } catch (JSONException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                      }
-        		    }
-        		}, new Response.ErrorListener() {
+            		JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.GET,
+            		    apiurl, null, 
+            		                            new Response.Listener<JSONObject>() {
+            		    @Override
+            		    public void onResponse(JSONObject response) {
+            		      try {
+                            Log.d("status",String.valueOf(response.getInt("status"))+" "+response.getString("url"));
+                            String outputPath =
+                                PreferenceManager.getDefaultSharedPreferences(MenuActivity.mContext).getString(
+                                    "outputPath",
+                                    MenuActivity.mContext.getExternalFilesDir(
+                                        Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath());
+
+                            String date =
+                                new java.text.SimpleDateFormat("yyyy-MM-dd_k-m-s_S").format(new java.util.Date(System
+                                    .currentTimeMillis()));
+
+                            String realoutput = outputPath + "/" + date + ".pdf";
+
+                            //创建下载文件的线程  
+                              Thread t=new Thread(new Download(response.getString("url"), realoutput));  
+                              t.start();  
+                              
+                          } catch (JSONException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                          }
+            		    }
+            		}, new Response.ErrorListener() {
 
         		    @Override
         		    public void onErrorResponse(VolleyError error) {
@@ -132,8 +150,9 @@ public class WebFragment extends Fragment{
 
 	    return parentView;
 	  }
+	
+		 private class MyWebViewClient extends WebViewClient {
 
-		private class MyWebViewClient extends WebViewClient {
 	         @Override
 	         public boolean shouldOverrideUrlLoading(WebView view, String url) {
 	        	 //myUrl = url;
