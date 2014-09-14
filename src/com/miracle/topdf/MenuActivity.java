@@ -65,14 +65,10 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
 	    itemHome = new ResideMenuItem(this, R.drawable.icon_home, R.string.home);
 	    itemVideo = new ResideMenuItem(this, R.drawable.icon_video, R.string.video);
 	    itemImages = new ResideMenuItem(this, R.drawable.icon_image, R.string.image);
-	    // itemCalendar = new ResideMenuItem(this, R.drawable.icon_calendar, "Progress");
-	    // itemSettings = new ResideMenuItem(this, R.drawable.icon_settings, "Settings");
 	
 	    itemHome.setOnClickListener(this);
 	    itemVideo.setOnClickListener(this);
 	    itemImages.setOnClickListener(this);
-	    // itemCalendar.setOnClickListener(this);
-	    // itemSettings.setOnClickListener(this);
 	
 	    // Create an ad.
 	    AdView adView = new AdView(this);

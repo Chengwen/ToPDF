@@ -16,6 +16,7 @@ import com.android.volley.toolbox.Volley;
 import android.support.v4.app.Fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
@@ -36,22 +37,25 @@ import android.widget.ImageView;
 public class WebFragment extends Fragment{
 	private View parentView;
 	private EditText editText;
-    private Button   button;
     private WebView  webView;
     private RequestQueue mQueue;
     private ImageView go;
     private String url;
     private ImageView convert;
+    public static String filename="";
+    public static Boolean downloaded=false;
+    private ImageView preview;
     //String myUrl;
     
 	@SuppressLint("SetJavaScriptEnabled")
 	@Override
-	  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	    parentView = inflater.inflate(R.layout.webview, container, false);
 	    editText = (EditText) parentView.findViewById(R.id.editText);
 	    convert   = (ImageView)   parentView.findViewById(R.id.convert);
 	    go = (ImageView) parentView.findViewById(R.id.imageView1);
         webView  = (WebView)  parentView.findViewById(R.id.webView);
+        preview = (ImageView) parentView.findViewById(R.id.preview);
         webView.setWebViewClient(new MyWebViewClient());
 
         WebSettings webSettings = webView.getSettings();
@@ -61,6 +65,7 @@ public class WebFragment extends Fragment{
         mQueue = Volley.newRequestQueue(MenuActivity.mContext);  
         
         go.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v) {
                     url=editText.getText().toString();
                     if (url.startsWith("http://")||url.startsWith("https://"))
@@ -72,6 +77,25 @@ public class WebFragment extends Fragment{
             }
         });
         
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+            // TODO Auto-generated method stub
+	            if(keyCode==KeyEvent.KEYCODE_ENTER) {
+	            	url=editText.getText().toString();
+	            	if (url.startsWith("http://")||url.startsWith("https://"))
+                    	webView.loadUrl(url);
+                    else 
+                    	webView.loadUrl("http://"+url);
+	                     
+	            	InputMethodManager in = (InputMethodManager) MenuActivity.mContext.getSystemService(MenuActivity.INPUT_METHOD_SERVICE);
+	                in.hideSoftInputFromWindow(editText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+	            	return true;
+	            }
+	            return false;
+	        }
+        });
         
         convert.setOnClickListener(new View.OnClickListener() {
 			
@@ -94,7 +118,7 @@ public class WebFragment extends Fragment{
             		    @Override
             		    public void onResponse(JSONObject response) {
             		      try {
-                            Log.d("status",String.valueOf(response.getInt("status"))+" "+response.getString("url"));
+                            Log.e("status",String.valueOf(response.getInt("status"))+" "+response.getString("url"));
                             String outputPath =
                                 PreferenceManager.getDefaultSharedPreferences(MenuActivity.mContext).getString(
                                     "outputPath",
@@ -105,7 +129,8 @@ public class WebFragment extends Fragment{
                                 new java.text.SimpleDateFormat("yyyy-MM-dd_k-m-s_S").format(new java.util.Date(System
                                     .currentTimeMillis()));
 
-                            String realoutput = outputPath + "/" + date + ".pdf";
+                            downloaded=false;
+                            String realoutput =filename= outputPath + "/" + date + ".pdf";
 
                             //创建下载文件的线程  
                               Thread t=new Thread(new Download(response.getString("url"), realoutput));  
@@ -113,7 +138,7 @@ public class WebFragment extends Fragment{
                               
                           } catch (JSONException e) {
                             // TODO Auto-generated catch block
-                            e.printStackTrace();
+                            Log.e("error",e.toString());
                           }
             		    }
             		}, new Response.ErrorListener() {
@@ -126,32 +151,24 @@ public class WebFragment extends Fragment{
         		mQueue.add(jsonObjRequest); 
 				
 			}
+			
 		});
         
-        editText.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-            // TODO Auto-generated method stub
-	            if(keyCode==KeyEvent.KEYCODE_ENTER) {
-	            	url=editText.getText().toString();
-	            	if (url.startsWith("http://")||url.startsWith("https://"))
-                    	webView.loadUrl(url);
-                    else 
-                    	webView.loadUrl("http://"+url);
-	                     
-	            	InputMethodManager in = (InputMethodManager) MenuActivity.mContext.getSystemService(MenuActivity.INPUT_METHOD_SERVICE);
-	                in.hideSoftInputFromWindow(editText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-
-	            	return true;
-	            }
-	            return false;
-	        }
+        preview.setOnClickListener(new View.OnClickListener(){
+        	@Override
+			public void onClick(View v) {
+        		Intent intent = new Intent();  
+                intent.setClass(MenuActivity.mContext, ViewActivity.class);  
+                startActivity(intent); 
+        	}
         });
+        
+        
 
 	    return parentView;
-	  }
+	}
 	
-		 private class MyWebViewClient extends WebViewClient {
+		private class MyWebViewClient extends WebViewClient {
 
 	         @Override
 	         public boolean shouldOverrideUrlLoading(WebView view, String url) {

@@ -27,9 +27,7 @@ public class Download implements Runnable{
         File file = new File(fileName);
 
         long startTime = System.currentTimeMillis();
-        Log.d("ImageManager", "download begining");
-        Log.d("ImageManager", "download url:" + url);
-        Log.d("ImageManager", "downloaded file name:" + fileName);
+        Log.e("ImageManager", "download url:" + url +" save as "+fileName);
         /* Open a connection to that URL. */
         URLConnection ucon = url.openConnection();
 
@@ -52,12 +50,12 @@ public class Download implements Runnable{
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(baf.toByteArray());
         fos.close();
-        Log.d("ImageManager", "download ready in"
+        Log.e("ImageManager", "download ready in"
                         + ((System.currentTimeMillis() - startTime) / 1000)
                         + " sec");
 
 } catch (IOException e) {
-        Log.d("ImageManager", "Error: " + e);
+        Log.e("ImageManager", "Error: " + e);
 }
     }  
 }
