@@ -2,6 +2,8 @@ package com.miracle.topdf;
 
 
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +16,7 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.miracle.topdf.PDFWriter.PDFWriterFile;
 import com.miracle.topdf.ResideMenu.ResideMenuItem;
 
 
@@ -40,7 +43,21 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
 	    setContentView(R.layout.main);
 	    mContext = this;
 	    setUpMenu();
-	    // changeFragment(new VideoFragment());
+	    
+	    /*
+	    //Images to PDF
+	    PDFWriterFile pdf=new PDFWriterFile();
+    	    
+        String outputPath =
+            PreferenceManager.getDefaultSharedPreferences(MenuActivity.mContext).getString(
+                "outputPath",
+                MenuActivity.mContext.getExternalFilesDir(
+                    Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath());
+
+	    pdf.Create(new String[]{"/storage/emulated/0/p1.jpg","/storage/emulated/0/p2.jpg","/storage/emulated/0/p3.jpg","/storage/emulated/0/p4.png"},
+	        outputPath+"/test.pdf");
+	    */
+	   
 	    changeFragment(new HomeFragment());
 	    
 	  }

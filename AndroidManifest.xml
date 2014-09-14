@@ -53,7 +53,16 @@
 
         <activity
             android:name="com.miracle.topdf.ViewActivity"
+            android:name="com.miracle.topdf.PDFWriter.PDFWriterDemo"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.learnncode.mediachooser.activity.BucketHomeFragmentActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.learnncode.mediachooser.activity.HomeFragmentActivity"
         </activity>
         
         <activity
