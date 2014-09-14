@@ -60,9 +60,7 @@
             android:name="com.learnncode.mediachooser.activity.BucketHomeFragmentActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name="com.learnncode.mediachooser.activity.HomeFragmentActivity"
-        </activity>
+
         
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
