@@ -1,22 +1,18 @@
 package com.miracle.topdf;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.miracle.topdf.ResideMenu.*;
 
 
 public class HomeFragment extends Fragment {
 
   private View parentView;
-  private ResideMenu resideMenu;
   private static final int SELECT_VIDEO = 31212;
 protected static final int IMAGE_PICKER_SELECT = 0;
  
@@ -24,7 +20,6 @@ protected static final int IMAGE_PICKER_SELECT = 0;
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     parentView = inflater.inflate(R.layout.home, container, false);
-    setUpViews();
     
     TextView document = (TextView) parentView.findViewById(R.id.Document);
     TextView clipboard = (TextView) parentView.findViewById(R.id.Clipboard);
@@ -82,12 +77,6 @@ protected static final int IMAGE_PICKER_SELECT = 0;
     
     return parentView;
 
-  }
-
-
-  private void setUpViews() {
-    MenuActivity parentActivity = (MenuActivity) getActivity();
-    resideMenu = parentActivity.getResideMenu();
   }
 
 }

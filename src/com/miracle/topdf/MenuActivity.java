@@ -14,14 +14,13 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.miracle.topdf.ResideMenu.ResideMenu;
 import com.miracle.topdf.ResideMenu.ResideMenuItem;
 
 
 
 public class MenuActivity extends FragmentActivity implements View.OnClickListener{
 
-	  private ResideMenu resideMenu;
+
 	  private ResideMenuItem itemHome;
 	  private ResideMenuItem itemVideo;
 	  private ResideMenuItem itemImages;
@@ -62,15 +61,6 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
 	
 	  private void setUpMenu() {
 	
-	    // attach to current activity;
-	    resideMenu = new ResideMenu(this);
-	    resideMenu.setBackground(R.drawable.menu_background);
-	    // resideMenu.setBackground(R.drawable.gradient_dark_teal);
-	    resideMenu.attachToActivity(this);
-	    // resideMenu.setMenuListener(menuListener);
-	    // valid scale factor is between 0.0f and 1.0f. leftmenu'width is 150dip.
-	    resideMenu.setScaleValue(0.6f);
-	
 	    // create menu items;
 	    itemHome = new ResideMenuItem(this, R.drawable.icon_home, R.string.home);
 	    itemVideo = new ResideMenuItem(this, R.drawable.icon_video, R.string.video);
@@ -83,24 +73,6 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
 	    itemImages.setOnClickListener(this);
 	    // itemCalendar.setOnClickListener(this);
 	    // itemSettings.setOnClickListener(this);
-	
-	    resideMenu.addMenuItem(itemHome, ResideMenu.DIRECTION_LEFT);
-	    resideMenu.addMenuItem(itemVideo, ResideMenu.DIRECTION_LEFT);
-	    resideMenu.addMenuItem(itemImages, ResideMenu.DIRECTION_LEFT);
-	    // resideMenu.addMenuItem(itemCalendar, ResideMenu.DIRECTION_LEFT);
-	    // resideMenu.addMenuItem(itemSettings, ResideMenu.DIRECTION_LEFT);
-	
-	    // You can disable a direction by setting ->
-	    resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
-	    resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_LEFT);
-	
-	    /*findViewById(R.id.title_bar_left_menu).setOnClickListener(new View.OnClickListener() {
-	      @Override
-	      public void onClick(View view) {
-	        resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
-	      }
-	    });*/
-	
 	
 	    // Create an ad.
 	    AdView adView = new AdView(this);
@@ -134,9 +106,7 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
 	    if (view == itemHome) {
 	      changeFragment(new HomeFragment(), R.string.home);
 	    }
-	
-	
-	    resideMenu.closeMenu();
+
 	  }
 	
 	  @Override
@@ -154,7 +124,6 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
 	  }
 	
 	  public void changeFragment(Fragment targetFragment) {
-	    resideMenu.clearIgnoredViewList();
 	    getSupportFragmentManager().beginTransaction()
 	        .replace(R.id.main_fragment, targetFragment, "fragment")
 	        .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
@@ -175,11 +144,6 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
 	    }
 	
 	    changeFragment(targetFragment);
-	  }
-	
-	  // What good method is to access resideMen
-	  public ResideMenu getResideMenu() {
-	    return resideMenu;
 	  }
 
 }
