@@ -39,23 +39,7 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_action_discard" />
 
-             <ImageButton
-                 android:id="@+id/share"
-                 android:layout_width="55dip"
-                 android:layout_height="55dip"
-                 android:layout_alignParentRight="true"
-                 android:background="@android:color/transparent"
-                 android:paddingRight="10dp"
-                 android:scaleType="centerInside"
-                 android:src="@drawable/ic_action_share" />
-             <ImageButton
-                 android:id="@+id/share1"
-                 android:layout_width="55dip"
-                 android:layout_height="55dip"
-                 android:layout_toLeftOf="@id/share"
-                 android:background="#585858"
-                 android:scaleType="centerInside"
-                 android:src="@drawable/ic_action_share" />
+
             
 
              </RelativeLayout>

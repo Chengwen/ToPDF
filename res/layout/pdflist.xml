@@ -12,10 +12,12 @@
         android:background="#E6E6E6">
         
         <ListView
-	        android:id="@+id/list"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content" 
-	        android:background="@drawable/border">
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:paddingLeft="5dp" >
+
 	    </ListView>
         
     </RelativeLayout>

@@ -13,20 +13,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import com.miracle.topdf.MenuActivity;
-import com.miracle.topdf.R;
-
-import android.app.Activity;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.TextView;
 
 public class PDFWriterFile {
 

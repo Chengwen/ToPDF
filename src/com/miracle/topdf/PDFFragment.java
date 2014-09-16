@@ -1,32 +1,17 @@
 package com.miracle.topdf;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
 import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 public class PDFFragment extends Fragment{
@@ -61,6 +46,15 @@ public class PDFFragment extends Fragment{
 	    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	                // Clicking on items
+	        	String selected = parent.getItemAtPosition(position).toString();
+	        	Log.e("select", selected);
+	        	
+	        	Intent intent = new Intent();  
+                intent = intent.setClass(MenuActivity.mContext, ViewActivity.class);  
+                Bundle bundle = new Bundle();
+                bundle.putString("selected", selected);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 0); 
 	             }
 	        });
 

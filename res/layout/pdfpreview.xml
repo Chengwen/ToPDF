@@ -10,11 +10,25 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" 
         android:background="#E6E6E6">
-        
+        <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
 		<com.joanzapata.pdfview.PDFView
-		        android:id="@+id/pdfview"
-		        android:layout_width="fill_parent"
-		        android:layout_height="fill_parent"/>
+		    android:id="@+id/pdfview"
+		    android:layout_width="fill_parent"
+		    android:layout_height="0dip"
+		    android:layout_weight="1" />
+
+		<ImageView
+            android:id="@+id/share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_share" 
+            android:background="#1d1d1d"/>
+		</LinearLayout>
     </RelativeLayout>
 
 </FrameLayout>

@@ -2,8 +2,6 @@ package com.miracle.topdf;
 
 
 import android.os.Bundle;
-import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -16,7 +14,6 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.miracle.topdf.PDFWriter.PDFWriterFile;
 import com.miracle.topdf.ResideMenu.ResideMenuItem;
 
 

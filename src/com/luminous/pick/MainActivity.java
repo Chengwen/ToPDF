@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.ViewSwitcher;
 
 import com.miracle.topdf.R;
