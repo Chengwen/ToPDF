@@ -27,4 +27,8 @@
     <string name="Web">Web</string>
     <string name="Photo">Photo</string>
     <string name="PDFs">PDFs</string>
+    
+    <string name="btn_ok">OK</string>
+    <string name="btn_pick">Pick From Gallery</string>
+    <string name="btn_pick_mul">Pick From Gallery (Multiple)</string>
 </resources>

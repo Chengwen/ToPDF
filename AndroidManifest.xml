@@ -34,6 +34,12 @@
             android:value="5077000" />
 
         <activity
+            android:name="com.luminous.pick.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
             android:name="MenuActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -66,6 +72,15 @@
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:screenOrientation="portrait" />
+        
+        <activity android:name="com.luminous.pick.CustomGalleryActivity" >
+            <intent-filter>
+                <action android:name="luminous.ACTION_PICK" />
+                <action android:name="luminous.ACTION_MULTIPLE_PICK" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+ 		</activity>
     </application>
 
 </manifest>

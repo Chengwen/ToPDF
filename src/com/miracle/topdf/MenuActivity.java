@@ -103,7 +103,7 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
 	        new AdRequest.Builder().addTestDevice("FC7D96AEFE29BFC22052BE7C45B50486").build();
 	
 	    // Start loading the ad in the background.
-	    adView.loadAd(adRequest);
+	    //adView.loadAd(adRequest);
 	
 	  }
 	

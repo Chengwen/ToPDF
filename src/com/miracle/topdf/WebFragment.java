@@ -15,7 +15,6 @@ import com.android.volley.toolbox.Volley;
 
 import android.support.v4.app.Fragment;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -30,7 +29,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -132,7 +130,7 @@ public class WebFragment extends Fragment{
                             downloaded=false;
                             String realoutput =filename= outputPath + "/" + date + ".pdf";
 
-                            //创建下载文件的线程  
+                            //Download thread
                               Thread t=new Thread(new Download(response.getString("url"), realoutput));  
                               t.start();  
                               
