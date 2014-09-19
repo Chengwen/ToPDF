@@ -53,7 +53,6 @@ public class WebFragment extends Fragment{
 	    convert   = (ImageView)   parentView.findViewById(R.id.convert);
 	    go = (ImageView) parentView.findViewById(R.id.imageView1);
         webView  = (WebView)  parentView.findViewById(R.id.webView);
-        preview = (ImageView) parentView.findViewById(R.id.preview);
         webView.setWebViewClient(new MyWebViewClient());
 
         WebSettings webSettings = webView.getSettings();
@@ -150,18 +149,7 @@ public class WebFragment extends Fragment{
 				
 			}
 			
-		});
-        
-        preview.setOnClickListener(new View.OnClickListener(){
-        	@Override
-			public void onClick(View v) {
-        		Intent intent = new Intent();  
-                intent.setClass(MenuActivity.mContext, ViewActivity.class);  
-                startActivity(intent); 
-        	}
-        });
-        
-        
+		});        
 
 	    return parentView;
 	}

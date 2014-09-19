@@ -6,10 +6,16 @@
     android:background="@color/bg_light_blue"
     android:orientation="vertical" >
 
-    <include
-        android:layout_width="fill_parent"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/titlebar" />
+        android:layout_gravity="center"
+        android:background="#1d1d1d"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/Photo"
+        android:textColor="#ffffff"
+        android:textSize="24sp" />
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -45,16 +51,16 @@
         android:id="@+id/llBottomContainer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp" >
-
-        <Button
+        android:orientation="horizontal">
+        
+        <ImageView
             android:id="@+id/btnGalleryOk"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/btn_sel"
-            android:text="@string/btn_ok" />
+            android:layout_gravity="right"
+            android:background="#1d1d1d"
+            android:padding="6dp"
+            android:src="@drawable/pdf2" />
     </LinearLayout>
 
 </LinearLayout>

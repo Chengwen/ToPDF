@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import android.support.v4.app.Fragment;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,10 +14,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class PDFFragment extends Fragment{
 	private View parentView;
-	private ListView list;
+	private ListView listview;
 	
 	public ArrayList<String> GetFiles(String DirectoryPath) {
 	    ArrayList<String> MyFiles = new ArrayList<String>();
@@ -37,13 +39,16 @@ public class PDFFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	    parentView = inflater.inflate(R.layout.pdflist, container, false);
-	    list = (ListView) parentView.findViewById(R.id.list);
+	    listview = (ListView) parentView.findViewById(R.id.list);
+	    
+	    TextView txtTitle = (TextView) parentView.findViewById(R.id.title);
 	    
 	    ArrayList<String> FilesInFolder = GetFiles("/storage/emulated/0/Android/data/com.miracle.topdf/files/data");
-	    list.setAdapter(new ArrayAdapter<String>(MenuActivity.mContext, android.R.layout.simple_list_item_1, FilesInFolder));
+	    listview.setAdapter(new ArrayAdapter<String>(MenuActivity.mContext, android.R.layout.simple_list_item_1, FilesInFolder));
         Log.e("file", FilesInFolder.toString());
-	    
-	    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        
+	    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	                // Clicking on items
 	        	String selected = parent.getItemAtPosition(position).toString();

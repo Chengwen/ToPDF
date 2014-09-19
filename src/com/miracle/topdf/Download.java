@@ -10,6 +10,8 @@ import java.net.URLConnection;
 
 import org.apache.http.util.ByteArrayBuffer;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 
 
@@ -53,6 +55,13 @@ public class Download implements Runnable{
         Log.e("ImageManager", "download ready in"
                         + ((System.currentTimeMillis() - startTime) / 1000)
                         + " sec");
+        
+        Intent intent = new Intent();  
+        intent = intent.setClass(MenuActivity.mContext, ViewActivity.class);  
+        Bundle bundle = new Bundle();
+        bundle.putString("selected", fileName);
+        intent.putExtras(bundle);
+        MenuActivity.mContext.startActivityForResult(intent, 0); 
 
 } catch (IOException e) {
         Log.e("ImageManager", "Error: " + e);

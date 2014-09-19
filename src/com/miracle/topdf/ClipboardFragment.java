@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class ClipboardFragment extends Fragment{
 	private View parentView;
@@ -46,52 +47,61 @@ public class ClipboardFragment extends Fragment{
 			public void onClick(View v) {
 				String apiurl="";
 		    	String text = editText.getText().toString();
-				Log.e("test", text);
-				try {
-	                  apiurl = "http://api.docs88.com/v1/texttopdf?text=" + URLEncoder.encode(text, "UTF-8");
-	      	    		
-	                } catch (UnsupportedEncodingException e1) {
-	                  // TODO Auto-generated catch block
-	                  e1.printStackTrace();
-	                }
-
-            		JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.GET,
-            		    apiurl, null, 
-            		                            new Response.Listener<JSONObject>() {
-            		    @Override
-            		    public void onResponse(JSONObject response) {
-            		      try {
-                            Log.e("status",String.valueOf(response.getInt("status"))+" "+response.getString("url"));
-                            String outputPath =
-                                PreferenceManager.getDefaultSharedPreferences(MenuActivity.mContext).getString(
-                                    "outputPath",
-                                    MenuActivity.mContext.getExternalFilesDir(
-                                        Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath());
-
-                            String date =
-                                new java.text.SimpleDateFormat("yyyy-MM-dd_k-m-s_S").format(new java.util.Date(System
-                                    .currentTimeMillis()));
-
-                            downloaded=false;
-                            String realoutput =filename= outputPath + "/" + date + ".pdf";
-
-                            //Download thread
-                              Thread t=new Thread(new Download(response.getString("url"), realoutput));  
-                              t.start();  
-                              
-                          } catch (JSONException e) {
-                            // TODO Auto-generated catch block
-                            Log.e("error",e.toString());
-                          }
-            		    }
-            		}, new Response.ErrorListener() {
-
-        		    @Override
-        		    public void onErrorResponse(VolleyError error) {
-        		    }
-        		});
-
-        		mQueue.add(jsonObjRequest); 
+		    	
+		    	if("".equals(editText.getText().toString().trim())){
+		    		Toast toast = Toast.makeText(MenuActivity.mContext, "Text is Empty", Toast.LENGTH_LONG); 
+		    		toast.show(); 
+		    	}
+		    	
+		    	else{
+		    		
+					Log.e("test", text);
+					try {
+		                  apiurl = "http://api.docs88.com/v1/texttopdf?text=" + URLEncoder.encode(text, "UTF-8");
+		      	    		
+		                } catch (UnsupportedEncodingException e1) {
+		                  // TODO Auto-generated catch block
+		                  e1.printStackTrace();
+		                }
+	
+	            		JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.GET,
+	            		    apiurl, null, 
+	            		                            new Response.Listener<JSONObject>() {
+	            		    @Override
+	            		    public void onResponse(JSONObject response) {
+	            		      try {
+	                            Log.e("status",String.valueOf(response.getInt("status"))+" "+response.getString("url"));
+	                            String outputPath =
+	                                PreferenceManager.getDefaultSharedPreferences(MenuActivity.mContext).getString(
+	                                    "outputPath",
+	                                    MenuActivity.mContext.getExternalFilesDir(
+	                                        Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath());
+	
+	                            String date =
+	                                new java.text.SimpleDateFormat("yyyy-MM-dd_k-m-s_S").format(new java.util.Date(System
+	                                    .currentTimeMillis()));
+	
+	                            downloaded=false;
+	                            String realoutput =filename= outputPath + "/" + date + ".pdf";
+	
+	                            //Download thread
+	                              Thread t=new Thread(new Download(response.getString("url"), realoutput));  
+	                              t.start();  
+	                              
+	                          } catch (JSONException e) {
+	                            // TODO Auto-generated catch block
+	                            Log.e("error",e.toString());
+	                          }
+	            		    }
+	            		}, new Response.ErrorListener() {
+	
+	        		    @Override
+	        		    public void onErrorResponse(VolleyError error) {
+	        		    }
+	        		});
+	
+	        		mQueue.add(jsonObjRequest); 
+		    	}
 				
 			}
 			

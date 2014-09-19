@@ -32,8 +32,9 @@
                 android:id="@+id/convert_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_action_refresh"
-				android:background="#151515"/>
+                android:background="#151515"
+                android:padding="6dp"
+                android:src="@drawable/pdf2" />
             
             </LinearLayout>
 

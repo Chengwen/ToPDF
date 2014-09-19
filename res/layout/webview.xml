@@ -57,15 +57,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:src="@drawable/ic_action_refresh" 
-            android:background="#1d1d1d"/>
-        <ImageView
-            android:id="@+id/preview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:src="@drawable/ic_action_refresh" 
-            android:background="#1d1d1d"/>
+            android:background="#1d1d1d"
+            android:padding="6dp"
+            android:src="@drawable/pdf2" />
 
     </LinearLayout>
     </RelativeLayout>

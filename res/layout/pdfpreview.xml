@@ -21,13 +21,32 @@
 		    android:layout_width="fill_parent"
 		    android:layout_height="0dip"
 		    android:layout_weight="1" />
+		
+		<RelativeLayout
+            android:id="@+id/linear1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:background="#1d1d1d">
 
 		<ImageView
-            android:id="@+id/share"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_action_share" 
-            android:background="#1d1d1d"/>
+		    android:id="@+id/delete"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:paddingLeft="10dp"
+		    android:paddingRight="10dp"
+		    android:src="@drawable/ic_action_delete" />
+
+		<ImageView
+		    android:id="@+id/share"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentRight="true"
+		    android:paddingLeft="10dp"
+		    android:paddingRight="10dp"
+		    android:src="@drawable/ic_action_share" />
+
+		</RelativeLayout>
 		</LinearLayout>
     </RelativeLayout>
 

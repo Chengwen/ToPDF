@@ -24,6 +24,7 @@ import android.widget.ImageView;
 
 import com.miracle.topdf.MenuActivity;
 import com.miracle.topdf.R;
+import com.miracle.topdf.ViewActivity;
 import com.miracle.topdf.PDFWriter.PDFWriterFile;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -41,7 +42,7 @@ public class CustomGalleryActivity extends Activity {
 	GalleryAdapter adapter;
 
 	ImageView imgNoMedia;
-	Button btnGalleryOk;
+	ImageView btnGalleryOk;
 
 	String action;
 	private ImageLoader imageLoader;
@@ -114,7 +115,7 @@ public class CustomGalleryActivity extends Activity {
 		gridGallery.setAdapter(adapter);
 		imgNoMedia = (ImageView) findViewById(R.id.imgNoMedia);
 
-		btnGalleryOk = (Button) findViewById(R.id.btnGalleryOk);
+		btnGalleryOk = (ImageView) findViewById(R.id.btnGalleryOk);
 		btnGalleryOk.setOnClickListener(mOkClickListener);
 
 		new Thread() {
@@ -171,8 +172,19 @@ public class CustomGalleryActivity extends Activity {
 	                    Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath());
 		    
 		    String[] all_path = data.getStringArrayExtra("all_path");
-	        pdf.Create(all_path, outputPath+"/test1.pdf");
+		    String date =
+                    new java.text.SimpleDateFormat("yyyy-MM-dd_k-m-s_S").format(new java.util.Date(System
+                        .currentTimeMillis()));
+	        pdf.Create(all_path, outputPath+"/" + date + ".pdf");
 		    Log.e("path1", outputPath);
+
+	        Intent intent = new Intent();  
+	        intent = intent.setClass(MenuActivity.mContext, ViewActivity.class);  
+	        Bundle bundle = new Bundle();
+	        bundle.putString("selected", outputPath+"/" + date + ".pdf");
+	        intent.putExtras(bundle);
+	        MenuActivity.mContext.startActivityForResult(intent, 0); 
+
 
 		}
 	};
