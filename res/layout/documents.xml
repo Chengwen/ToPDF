@@ -36,12 +36,7 @@
                 android:layout_height="55dip"
                 android:background="@android:color/transparent"
                 android:paddingLeft="10dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_action_discard" />
-
-
-            
-
+                android:scaleType="centerInside"/>
              </RelativeLayout>
 
     </RelativeLayout>

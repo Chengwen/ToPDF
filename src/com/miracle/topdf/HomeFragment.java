@@ -23,20 +23,20 @@ protected static final int IMAGE_PICKER_SELECT = 0;
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     parentView = inflater.inflate(R.layout.home, container, false);
     
-    TextView document = (TextView) parentView.findViewById(R.id.Document);
+    //TextView document = (TextView) parentView.findViewById(R.id.Document);
     TextView clipboard = (TextView) parentView.findViewById(R.id.Clipboard);
     TextView web = (TextView) parentView.findViewById(R.id.Web);
     TextView photo = (TextView) parentView.findViewById(R.id.Photo);
     TextView pdf = (TextView) parentView.findViewById(R.id.PDFs);
     
-    document.setOnClickListener(new View.OnClickListener() {
+    /*document.setOnClickListener(new View.OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			MenuActivity.mContext.changeFragment(new DocumentsFragment(), R.string.Documents);
 		}
-    });
+    });*/
     
     clipboard.setOnClickListener(new View.OnClickListener() {
 		

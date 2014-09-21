@@ -15,6 +15,25 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical" >
+            
+            <FrameLayout
+            android:id="@+id/framelayout22"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#1d1d1d" >
+
+            <TextView
+                android:id="@+id/title_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="PDF" 
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
+
+        </FrameLayout>
+            
 
 		<com.joanzapata.pdfview.PDFView
 		    android:id="@+id/pdfview"

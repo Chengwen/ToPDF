@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -21,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.miracle.topdf.MenuActivity;
 import com.miracle.topdf.R;
@@ -36,7 +39,7 @@ import com.nostra13.universalimageloader.core.assist.PauseOnScrollListener;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
 public class CustomGalleryActivity extends Activity {
-
+	final Context context = this;
 	GridView gridGallery;
 	Handler handler;
 	GalleryAdapter adapter;
@@ -150,42 +153,73 @@ public class CustomGalleryActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			ArrayList<CustomGallery> selected = adapter.getSelected();
-
-			String[] allPath = new String[selected.size()];
-			for (int i = 0; i < allPath.length; i++) {
-				allPath[i] = selected.get(i).sdcardPath;
-				Log.e("allpath", allPath[i]);
-			}
-
-			Intent data = new Intent().putExtra("all_path", allPath);
-			setResult(RESULT_OK, data);
-			finish();
 			
-		    //Images to PDF
-		    PDFWriterFile pdf=new PDFWriterFile();
-	    	    
-	        String outputPath =
-	            PreferenceManager.getDefaultSharedPreferences(MenuActivity.mContext).getString(
-	                "outputPath",
-	                MenuActivity.mContext.getExternalFilesDir(
-	                    Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath());
-		    
-		    String[] all_path = data.getStringArrayExtra("all_path");
-		    String date =
-                    new java.text.SimpleDateFormat("yyyy-MM-dd_k-m-s_S").format(new java.util.Date(System
-                        .currentTimeMillis()));
-	        pdf.Create(all_path, outputPath+"/" + date + ".pdf");
-		    Log.e("path1", outputPath);
+			// custom dialog
+			final Dialog dialog = new Dialog(context);
+			dialog.setContentView(R.layout.convert_dialog);
+			dialog.setTitle("Convert to PDF?");
+			
+			Button yes = (Button) dialog.findViewById(R.id.yes);
+			yes.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					ArrayList<CustomGallery> selected = adapter.getSelected();
+					String[] allPath = new String[selected.size()];
+					
+					if(allPath.length==0){
+						Toast toast = Toast.makeText(MenuActivity.mContext, "No photo selected, please select photos", Toast.LENGTH_SHORT); 
+			    		toast.show(); 
+					}
+					
+					else{
+					for (int i = 0; i < allPath.length; i++) {
+						allPath[i] = selected.get(i).sdcardPath;
+						Log.e("allpath", allPath[i]);
+					}
 
-	        Intent intent = new Intent();  
-	        intent = intent.setClass(MenuActivity.mContext, ViewActivity.class);  
-	        Bundle bundle = new Bundle();
-	        bundle.putString("selected", outputPath+"/" + date + ".pdf");
-	        intent.putExtras(bundle);
-	        MenuActivity.mContext.startActivityForResult(intent, 0); 
+					Intent data = new Intent().putExtra("all_path", allPath);
+					setResult(RESULT_OK, data);
+					finish();
+					
+				    //Images to PDF
+				    PDFWriterFile pdf=new PDFWriterFile();
+			    	    
+			        String outputPath =
+			            PreferenceManager.getDefaultSharedPreferences(MenuActivity.mContext).getString(
+			                "outputPath",
+			                MenuActivity.mContext.getExternalFilesDir(
+			                    Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath());
+				    
+				    String[] all_path = data.getStringArrayExtra("all_path");
+				    String date =
+		                    new java.text.SimpleDateFormat("yyyy-MM-dd_k-m-s_S").format(new java.util.Date(System
+		                        .currentTimeMillis()));
+			        pdf.Create(all_path, outputPath+"/" + date + ".pdf");
+				    Log.e("path1", outputPath);
 
-
+			        Intent intent = new Intent();  
+			        intent = intent.setClass(MenuActivity.mContext, ViewActivity.class);  
+			        Bundle bundle = new Bundle();
+			        bundle.putString("selected", outputPath+"/" + date + ".pdf");
+			        intent.putExtras(bundle);
+			        MenuActivity.mContext.startActivityForResult(intent, 0); 
+					}
+				}
+			});
+ 
+			Button no = (Button) dialog.findViewById(R.id.no);
+			// if button is clicked, close the custom dialog
+			no.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();
+				}
+			});
+ 
+			dialog.show();
 		}
 	};
 	AdapterView.OnItemClickListener mItemMulClickListener = new AdapterView.OnItemClickListener() {

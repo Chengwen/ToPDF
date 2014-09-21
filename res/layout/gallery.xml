@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:background="#1d1d1d"
-            android:padding="6dp"
+            android:padding="8dp"
             android:src="@drawable/pdf2" />
     </LinearLayout>
 

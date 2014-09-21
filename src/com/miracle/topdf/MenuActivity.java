@@ -16,8 +16,6 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.miracle.topdf.ResideMenu.ResideMenuItem;
 
-
-
 public class MenuActivity extends FragmentActivity implements View.OnClickListener{
 
 
@@ -91,13 +89,13 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
 	
 	    // Add the AdView to the view hierarchy. The view will have no size
 	    // until the ad is loaded.
-	    LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout);
-	    layout.addView(adView);
+	    //LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout);
+	    //layout.addView(adView);
 	
 	    // Create an ad request. Check logcat output for the hashed device ID to
 	    // get test ads on a physical device.
-	    AdRequest adRequest =
-	        new AdRequest.Builder().addTestDevice("FC7D96AEFE29BFC22052BE7C45B50486").build();
+	    //AdRequest adRequest =
+	     //   new AdRequest.Builder().addTestDevice("FC7D96AEFE29BFC22052BE7C45B50486").build();
 	
 	    // Start loading the ad in the background.
 	    //adView.loadAd(adRequest);

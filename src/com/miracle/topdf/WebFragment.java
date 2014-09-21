@@ -15,7 +15,7 @@ import com.android.volley.toolbox.Volley;
 
 import android.support.v4.app.Fragment;
 import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,6 +29,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -42,7 +43,6 @@ public class WebFragment extends Fragment{
     private ImageView convert;
     public static String filename="";
     public static Boolean downloaded=false;
-    private ImageView preview;
     //String myUrl;
     
 	@SuppressLint("SetJavaScriptEnabled")
@@ -54,6 +54,7 @@ public class WebFragment extends Fragment{
 	    go = (ImageView) parentView.findViewById(R.id.imageView1);
         webView  = (WebView)  parentView.findViewById(R.id.webView);
         webView.setWebViewClient(new MyWebViewClient());
+        webView.loadUrl("http://google.com");
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setBuiltInZoomControls(true);
@@ -99,56 +100,84 @@ public class WebFragment extends Fragment{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String apiurl="";
-				editText.setText(webView.getUrl());
-				url=webView.getUrl();
-                try {
-                  apiurl = "http://api.docs88.com/v1/webtopdf?url="+URLEncoder.encode(url, "UTF-8");
-                } catch (UnsupportedEncodingException e1) {
-                  // TODO Auto-generated catch block
-                  e1.printStackTrace();
-                }
-
-            		JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.GET,
-            		    apiurl, null, 
-            		                            new Response.Listener<JSONObject>() {
-            		    @Override
-            		    public void onResponse(JSONObject response) {
-            		      try {
-                            Log.e("status",String.valueOf(response.getInt("status"))+" "+response.getString("url"));
-                            String outputPath =
-                                PreferenceManager.getDefaultSharedPreferences(MenuActivity.mContext).getString(
-                                    "outputPath",
-                                    MenuActivity.mContext.getExternalFilesDir(
-                                        Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath());
-
-                            String date =
-                                new java.text.SimpleDateFormat("yyyy-MM-dd_k-m-s_S").format(new java.util.Date(System
-                                    .currentTimeMillis()));
-
-                            downloaded=false;
-                            String realoutput =filename= outputPath + "/" + date + ".pdf";
-
-                            //Download thread
-                              Thread t=new Thread(new Download(response.getString("url"), realoutput));  
-                              t.start();  
-                              
-                          } catch (JSONException e) {
-                            // TODO Auto-generated catch block
-                            Log.e("error",e.toString());
-                          }
-            		    }
-            		}, new Response.ErrorListener() {
-
-        		    @Override
-        		    public void onErrorResponse(VolleyError error) {
-        		    }
-        		});
-
-        		mQueue.add(jsonObjRequest); 
 				
+				
+				// custom dialog
+				final Dialog dialog = new Dialog(MenuActivity.mContext);
+				dialog.setContentView(R.layout.convert_dialog);
+				dialog.setTitle("Convert to PDF?");
+				
+				Button yes = (Button) dialog.findViewById(R.id.yes);
+				yes.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						String apiurl="";
+						
+						url=webView.getUrl();
+						editText.setText(webView.getUrl());
+		                try {
+		                  apiurl = "http://api.docs88.com/v1/webtopdf?url="+URLEncoder.encode(url, "UTF-8");
+		                } catch (UnsupportedEncodingException e1) {
+		                  // TODO Auto-generated catch block
+		                  e1.printStackTrace();
+		                }
+
+		            		JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.GET,
+		            		    apiurl, null, 
+		            		                            new Response.Listener<JSONObject>() {
+		            		    @Override
+		            		    public void onResponse(JSONObject response) {
+		            		      try {
+		                            Log.e("status",String.valueOf(response.getInt("status"))+" "+response.getString("url"));
+		                            String outputPath =
+		                                PreferenceManager.getDefaultSharedPreferences(MenuActivity.mContext).getString(
+		                                    "outputPath",
+		                                    MenuActivity.mContext.getExternalFilesDir(
+		                                        Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath());
+
+		                            String date =
+		                                new java.text.SimpleDateFormat("yyyy-MM-dd_k-m-s_S").format(new java.util.Date(System
+		                                    .currentTimeMillis()));
+
+		                            downloaded=false;
+		                            String realoutput =filename= outputPath + "/" + date + ".pdf";
+
+		                            //Download thread
+		                              Thread t=new Thread(new Download(response.getString("url"), realoutput));  
+		                              t.start();  
+		                              
+		                          } catch (JSONException e) {
+		                            // TODO Auto-generated catch block
+		                            Log.e("error",e.toString());
+		                          }
+		            		    }
+		            		}, new Response.ErrorListener() {
+
+		        		    @Override
+		        		    public void onErrorResponse(VolleyError error) {
+		        		    }
+		        		});
+
+		        		mQueue.add(jsonObjRequest); 
+						
+					}
+				});
+	 
+				Button no = (Button) dialog.findViewById(R.id.no);
+				// if button is clicked, close the custom dialog
+				no.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						dialog.dismiss();
+					}
+				});
+	 
+				dialog.show();
 			}
-			
+
 		});        
 
 	    return parentView;

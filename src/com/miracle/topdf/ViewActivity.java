@@ -14,6 +14,7 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import static java.lang.String.format;
@@ -27,6 +28,7 @@ public class ViewActivity extends Activity implements OnPageChangeListener {
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pdfpreview); 
         
@@ -62,7 +64,7 @@ public class ViewActivity extends Activity implements OnPageChangeListener {
 				// custom dialog
 				final Dialog dialog = new Dialog(context);
 				dialog.setContentView(R.layout.delete);
-				dialog.setTitle("Delete PDF");
+				dialog.setTitle("Delete this PDF?");
 				
 				Button deletebtn = (Button) dialog.findViewById(R.id.deletebtn);
 				deletebtn.setOnClickListener(new View.OnClickListener() {
