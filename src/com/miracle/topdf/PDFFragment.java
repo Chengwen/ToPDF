@@ -52,23 +52,23 @@ public class PDFFragment extends Fragment{
     		toast.show(); 
 	    }
 	    else{
-	    listview.setAdapter(new ArrayAdapter<String>(MenuActivity.mContext, android.R.layout.simple_list_item_1, FilesInFolder));
-        Log.e("file", FilesInFolder.toString());
-        
-	    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	                // Clicking on items
-	        	String selected = parent.getItemAtPosition(position).toString();
-	        	Log.e("select", selected);
-	        	
-	        	Intent intent = new Intent();  
-                intent = intent.setClass(MenuActivity.mContext, ViewActivity.class);  
-                Bundle bundle = new Bundle();
-                bundle.putString("selected", selected);
-                intent.putExtras(bundle);
-                startActivityForResult(intent, 0); 
-	             }
-	        });
+		    listview.setAdapter(new ArrayAdapter<String>(MenuActivity.mContext, android.R.layout.simple_list_item_1, FilesInFolder));
+	        Log.e("file", FilesInFolder.toString());
+	        
+		    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		                // Clicking on items
+		        	String selected = parent.getItemAtPosition(position).toString();
+		        	Log.e("select", selected);
+		        	
+		        	Intent intent = new Intent();  
+	                intent = intent.setClass(MenuActivity.mContext, ViewActivity.class);  
+	                Bundle bundle = new Bundle();
+	                bundle.putString("selected", selected);
+	                intent.putExtras(bundle);
+	                startActivityForResult(intent, 0); 
+		         }
+		     });
 
 	    }
 	    return parentView;

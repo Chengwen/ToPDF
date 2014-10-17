@@ -46,8 +46,10 @@ public class ClipboardFragment extends Fragment{
 	    
 		ClipboardManager clipboard = (ClipboardManager) MenuActivity.mContext.getSystemService(Context.CLIPBOARD_SERVICE); 
 		//clipboard.setText("Text to copy");
-		String copytext = clipboard.getText().toString();
-		editText.setText(copytext);
+		if(clipboard.hasText()){
+			String copytext = clipboard.getText().toString();
+			editText.setText(copytext);
+		}
 	    
 	    convert.setOnClickListener(new View.OnClickListener() {
 

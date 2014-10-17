@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="app_name">Mediachooser learnNcode</string>
-    <string name="folder_view">Folder view</string>
-    <string name="file_view">File view</string>
-
-</resources>

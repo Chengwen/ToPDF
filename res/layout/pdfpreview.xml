@@ -11,7 +11,7 @@
         android:orientation="vertical" 
         android:background="#E6E6E6">
         <LinearLayout
-            android:id="@+id/linear1"
+            android:id="@+id/linear11"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical" >

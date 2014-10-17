@@ -29,15 +29,6 @@ protected static final int IMAGE_PICKER_SELECT = 0;
     TextView photo = (TextView) parentView.findViewById(R.id.Photo);
     TextView pdf = (TextView) parentView.findViewById(R.id.PDFs);
     
-    /*document.setOnClickListener(new View.OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			MenuActivity.mContext.changeFragment(new DocumentsFragment(), R.string.Documents);
-		}
-    });*/
-    
     clipboard.setOnClickListener(new View.OnClickListener() {
 		
 		@Override
@@ -89,10 +80,6 @@ protected static final int IMAGE_PICKER_SELECT = 0;
 		if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
 			String[] all_path = data.getStringArrayExtra("all_path");
 			
-			/*for (int i = 0; i < all_path.length; i++) {
-				Log.e("path", all_path[i]);
-			}*/
-
 		}
 	}
 }
